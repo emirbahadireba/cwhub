@@ -148,43 +148,43 @@ export const Dashboard: React.FC = () => {
   ]
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 lg:space-y-8">
       {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent p-8 text-white"
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent p-6 sm:p-8 text-white"
       >
         <div className="relative z-10">
-          <h1 className="text-4xl font-bold mb-4">Hoş geldin, {user?.name}! 👋</h1>
-          <p className="text-lg opacity-90 mb-6">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-4">Hoş geldin, {user?.name}! 👋</h1>
+          <p className="text-sm sm:text-base lg:text-lg opacity-90 mb-4 sm:mb-6">
             Bu ay {campaignStats.active} aktif kampanya var ve {taskStats.done} görev tamamlandı
           </p>
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
               onClick={() => {
                 setModalType('campaign')
                 setShowCreateModal(true)
               }}
-              className="px-6 py-3 bg-white/20 rounded-xl backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-all"
+              className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-white/20 rounded-xl backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-all text-sm sm:text-base"
             >
               Yeni Kampanya Başlat
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               onClick={() => setCurrentView('analytics')}
-              className="px-6 py-3 border border-white/30 rounded-xl hover:bg-white/10 transition-all"
+              className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 border border-white/30 rounded-xl hover:bg-white/10 transition-all text-sm sm:text-base"
             >
               Rapor Görüntüle
             </motion.button>
           </div>
         </div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
       </motion.div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {quickActions.map((action, index) => {
           const Icon = action.icon
           return (
@@ -196,17 +196,17 @@ export const Dashboard: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={action.onClick}
-              className={`p-4 rounded-xl ${action.color} text-white hover:shadow-lg transition-all`}
+              className={`p-3 sm:p-4 rounded-xl ${action.color} text-white hover:shadow-lg transition-all`}
             >
-              <Icon className="w-6 h-6 mb-2 mx-auto" />
-              <span className="text-sm font-medium">{action.label}</span>
+              <Icon className="w-5 sm:w-6 h-5 sm:h-6 mb-2 mx-auto" />
+              <span className="text-xs sm:text-sm font-medium">{action.label}</span>
             </motion.button>
           )
         })}
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, index) => {
           const Icon = stat.icon
           return (
@@ -217,58 +217,58 @@ export const Dashboard: React.FC = () => {
               transition={{ delay: index * 0.1 }}
               whileHover={{ scale: 1.02 }}
               onClick={stat.onClick}
-              className="p-6 rounded-2xl bg-surface border border-border hover:border-primary/50 transition-all text-left group"
+              className="p-4 sm:p-6 rounded-2xl bg-surface border border-border hover:border-primary/50 transition-all text-left group"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className={`p-3 rounded-xl bg-gradient-to-r ${stat.color}`}>
-                  <Icon className="w-6 h-6 text-white" />
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <div className={`p-2 sm:p-3 rounded-xl bg-gradient-to-r ${stat.color}`}>
+                  <Icon className="w-5 sm:w-6 h-5 sm:h-6 text-white" />
                 </div>
                 <div className="flex items-center space-x-1">
-                  <span className="text-success text-sm font-medium">{stat.change}</span>
-                  <ArrowRight className="w-4 h-4 text-textSecondary group-hover:text-primary transition-colors" />
+                  <span className="text-success text-xs sm:text-sm font-medium">{stat.change}</span>
+                  <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4 text-textSecondary group-hover:text-primary transition-colors" />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-1">{stat.value}</h3>
-              <p className="text-textSecondary">{stat.label}</p>
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{stat.value}</h3>
+              <p className="text-textSecondary text-sm">{stat.label}</p>
             </motion.button>
           )
         })}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
         {/* Recent Activities */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="lg:col-span-2 p-6 rounded-2xl bg-surface border border-border"
+          className="lg:col-span-2 p-4 sm:p-6 rounded-2xl bg-surface border border-border"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-white">Son Aktiviteler</h2>
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
+            <h2 className="text-lg sm:text-xl font-bold text-white">Son Aktiviteler</h2>
             <button 
               onClick={() => setCurrentView('analytics')}
-              className="text-primary hover:text-primary/80 flex items-center space-x-1"
+              className="text-primary hover:text-primary/80 flex items-center space-x-1 text-sm"
             >
-              <span>Tümünü Gör</span>
+              <span className="hidden sm:inline">Tümünü Gör</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
           
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {recentActivities.map((activity) => (
               <motion.button
                 key={activity.id}
                 onClick={activity.onClick}
                 whileHover={{ x: 4 }}
-                className="w-full flex items-center space-x-4 p-4 rounded-xl bg-background/50 hover:bg-background/70 transition-all text-left"
+                className="w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-xl bg-background/50 hover:bg-background/70 transition-all text-left"
               >
                 <div className={`w-2 h-2 rounded-full ${
                   activity.type === 'success' ? 'bg-success' : 'bg-secondary'
                 }`}></div>
-                <div className="flex-1">
-                  <p className="text-white font-medium">{activity.action}</p>
-                  <p className="text-textSecondary text-sm">{activity.client} • {activity.time}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-medium text-sm sm:text-base">{activity.action}</p>
+                  <p className="text-textSecondary text-xs sm:text-sm truncate">{activity.client} • {activity.time}</p>
                 </div>
-                <ArrowRight className="w-4 h-4 text-textSecondary" />
+                <ArrowRight className="w-4 h-4 text-textSecondary flex-shrink-0" />
               </motion.button>
             ))}
           </div>
@@ -278,10 +278,10 @@ export const Dashboard: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="p-6 rounded-2xl bg-surface border border-border"
+          className="p-4 sm:p-6 rounded-2xl bg-surface border border-border"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-white">Ekip Performansı</h2>
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
+            <h2 className="text-lg sm:text-xl font-bold text-white">Ekip Performansı</h2>
             <button 
               onClick={() => setCurrentView('teams')}
               className="text-primary hover:text-primary/80"
@@ -290,7 +290,7 @@ export const Dashboard: React.FC = () => {
             </button>
           </div>
           
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {teamPerformance.slice(0, 4).map((member) => (
               <motion.button
                 key={member.id}
@@ -302,16 +302,16 @@ export const Dashboard: React.FC = () => {
                   <img
                     src={member.avatar}
                     alt={member.name}
-                    className="w-10 h-10 rounded-full object-cover"
+                    className="w-8 sm:w-10 h-8 sm:h-10 rounded-full object-cover"
                   />
-                  <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-surface ${
+                  <div className={`absolute -bottom-1 -right-1 w-2 sm:w-3 h-2 sm:h-3 rounded-full border-2 border-surface ${
                     member.status === 'online' ? 'bg-success' :
                     member.status === 'away' ? 'bg-warning' :
                     member.status === 'busy' ? 'bg-error' : 'bg-textSecondary'
                   }`}></div>
                 </div>
-                <div className="flex-1 text-left">
-                  <p className="text-white font-medium text-sm">{member.name}</p>
+                <div className="flex-1 text-left min-w-0">
+                  <p className="text-white font-medium text-sm truncate">{member.name}</p>
                   <p className="text-textSecondary text-xs">{member.completedTasks}/{member.totalTasks} görev</p>
                 </div>
                 <div className="text-right">
@@ -327,20 +327,20 @@ export const Dashboard: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="p-6 rounded-2xl bg-surface border border-border"
+        className="p-4 sm:p-6 rounded-2xl bg-surface border border-border"
       >
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-white">Platform Performansı</h2>
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-xl font-bold text-white">Platform Performansı</h2>
           <button 
             onClick={() => setCurrentView('analytics')}
             className="text-primary hover:text-primary/80 flex items-center space-x-1"
           >
-            <span>Detaylı Analiz</span>
+            <span className="hidden sm:inline text-sm">Detaylı Analiz</span>
             <BarChart3 className="w-4 h-4" />
           </button>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {socialMetrics.map((metric) => (
             <motion.button
               key={metric.platform}
@@ -349,7 +349,7 @@ export const Dashboard: React.FC = () => {
               className="p-4 rounded-xl bg-background/30 hover:bg-background/50 transition-all text-left"
             >
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-white font-medium">{metric.platform}</h3>
+                <h3 className="text-white font-medium text-sm sm:text-base">{metric.platform}</h3>
                 <ArrowRight className="w-4 h-4 text-textSecondary" />
               </div>
               
@@ -383,20 +383,20 @@ export const Dashboard: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="p-6 rounded-2xl bg-surface border border-border"
+        className="p-4 sm:p-6 rounded-2xl bg-surface border border-border"
       >
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-white">Yaklaşan Görevler</h2>
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-xl font-bold text-white">Yaklaşan Görevler</h2>
           <button 
             onClick={() => setCurrentView('tasks')}
             className="text-primary hover:text-primary/80 flex items-center space-x-1"
           >
-            <span>Tümünü Gör</span>
+            <span className="hidden sm:inline text-sm">Tümünü Gör</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {tasks.slice(0, 6).map((task) => (
             <motion.button
               key={task.id}
@@ -417,9 +417,9 @@ export const Dashboard: React.FC = () => {
                 </span>
                 <Clock className="w-4 h-4 text-textSecondary" />
               </div>
-              <h3 className="text-white font-medium mb-2">{task.title}</h3>
-              <p className="text-textSecondary text-sm mb-3 line-clamp-2">{task.description}</p>
-              <div className="flex items-center justify-between text-sm">
+              <h3 className="text-white font-medium mb-2 text-sm sm:text-base line-clamp-1">{task.title}</h3>
+              <p className="text-textSecondary text-xs sm:text-sm mb-3 line-clamp-2">{task.description}</p>
+              <div className="flex items-center justify-between text-xs sm:text-sm">
                 <span className="text-textSecondary">{new Date(task.dueDate).toLocaleDateString('tr-TR')}</span>
                 <span className={`px-2 py-1 rounded-lg ${
                   task.status === 'done' ? 'bg-success/20 text-success' :
