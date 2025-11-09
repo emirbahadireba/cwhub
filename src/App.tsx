@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu } from 'lucide-react'
 import { useStore } from './store/useStore'
@@ -42,6 +42,22 @@ const renderCurrentView = (currentView: string) => {
 function App() {
   const { currentView } = useStore()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  // Check if desktop and auto-open sidebar
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const desktop = window.innerWidth >= 1024
+      setIsDesktop(desktop)
+      if (desktop) {
+        setSidebarOpen(true) // Always open on desktop
+      }
+    }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen)
@@ -49,7 +65,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Mobile Header */}
+      {/* Mobile Header - Only visible on mobile/tablet */}
       <div className="fixed top-0 left-0 right-0 h-16 bg-surface border-b border-border flex items-center px-4 z-30 lg:hidden">
         <button
           onClick={toggleSidebar}
@@ -65,11 +81,13 @@ function App() {
         </div>
       </div>
 
-      {/* Sidebar */}
-      <Sidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
+      {/* Sidebar - Always visible on desktop */}
+      <div className={`${isDesktop ? 'block' : 'hidden'} lg:block`}>
+        <Sidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
+      </div>
       
       {/* Main Content */}
-      <div className="flex-1 lg:overflow-hidden">
+      <div className="flex-1 lg:ml-0">
         <div className="pt-16 lg:pt-0 h-screen overflow-y-auto">
           <AnimatePresence mode="wait">
             <motion.div
